@@ -127,7 +127,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className="hidden rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-accent hover:text-white sm:inline-flex"
           >
-            Résumé
+            Resume
           </a>
 
           <button
