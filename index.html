@@ -1,10 +1,35 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
+    <title>Atharva Gaur — AI & Machine Learning Engineer</title>
+    <meta
+      name="description"
+      content="Portfolio of Atharva Gaur — AI/ML engineer specializing in machine learning, RAG systems, and full-stack development. B.Tech CS (AI & ML) at VIT Vellore."
+    />
+    <meta property="og:title" content="Atharva Gaur — AI & Machine Learning Engineer" />
+    <meta
+      property="og:description"
+      content="Building intelligent systems: machine learning, RAG applications, and full-stack products."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@400..800&family=JetBrains+Mono:ital,wght@0,400..700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        var stored = localStorage.getItem("theme");
+        var dark = stored
+          ? stored === "dark"
+          : !window.matchMedia("(prefers-color-scheme: light)").matches;
+        document.documentElement.classList.toggle("dark", dark);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

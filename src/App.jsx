@@ -1,29 +1,40 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Marquee from "./components/Marquee";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
-import Background from "./components/Background";
-import MouseGlow from "./components/MouseGlow";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import GridTexture from "./components/GridTexture";
+import CursorGlow from "./components/CursorGlow";
+import CustomCursor from "./components/CustomCursor";
+import ScrollProgress from "./components/ScrollProgress";
+import BackToTop from "./components/BackToTop";
+import useLenis from "./hooks/useLenis";
 
 function App() {
+  useLenis();
 
   return (
-
     <>
-      <Background />
-      <MouseGlow/>
+      <GridTexture />
+      <CursorGlow />
+      <ScrollProgress />
+      <CustomCursor />
       <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact/>
+      <main>
+        <Hero />
+        <Marquee />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
+      <BackToTop />
     </>
-
-  )
-
+  );
 }
 
 export default App;

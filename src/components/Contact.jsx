@@ -1,174 +1,124 @@
 import { motion } from "framer-motion";
 import {
-    FaEnvelope,
-    FaGithub,
-    FaLinkedin,
-    FaMapMarkerAlt,
+  FaArrowRight,
+  FaEnvelope,
+  FaGithub,
+  FaLinkedin,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
+import SectionHeading from "./SectionHeading";
+
+const ease = [0.22, 1, 0.36, 1];
+
+const contactRows = [
+  {
+    label: "Email",
+    value: "atharvagaur7487@gmail.com",
+    href: "mailto:atharvagaur7487@gmail.com",
+    icon: FaEnvelope,
+  },
+  {
+    label: "GitHub",
+    value: "github.com/Atharvagaur",
+    href: "https://github.com/Atharvagaur",
+    icon: FaGithub,
+  },
+  {
+    label: "LinkedIn",
+    value: "linkedin.com/in/atharvagaur7487",
+    href: "https://linkedin.com/in/atharvagaur7487",
+    icon: FaLinkedin,
+  },
+];
 
 const Contact = () => {
-    return (
-        <section
-            id="contact"
-            className="py-24 px-6 bg-slate-950"
+  return (
+    <section id="contact" className="section-pad border-t border-line">
+      <div className="container-site">
+        <SectionHeading eyebrow="Contact" title="Let's build something worth shipping." index="04" />
+
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease }}
+          className="-mt-6 max-w-2xl leading-8 text-muted"
         >
-            <div className="max-w-6xl mx-auto">
+          I'm always interested in discussing software engineering,
+          artificial intelligence, machine learning, and research
+          opportunities. Whether it's an internship, a collaboration, or
+          simply exchanging ideas — I'd be happy to connect.
+        </motion.p>
 
-                {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1, ease }}
+          className="mt-12 border-t border-line"
+        >
+          {contactRows.map((row) => (
+            <a
+              key={row.label}
+              href={row.href}
+              target={row.href.startsWith("mailto") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between gap-4 border-b border-line py-6"
+            >
+              <span className="flex items-center gap-5">
+                <row.icon className="text-muted transition-colors group-hover:text-accent" />
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted">
+                  {row.label}
+                </span>
+              </span>
+              <span className="flex items-center gap-4 text-right font-medium text-ink transition-colors group-hover:text-accent">
+                <span className="hidden sm:inline">{row.value}</span>
+                <FaArrowRight
+                  size={14}
+                  className="-translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                />
+              </span>
+            </a>
+          ))}
 
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center"
-                >
-                    <p className="text-blue-400 uppercase tracking-[0.3em] text-sm">
-                        Contact
-                    </p>
+          <div className="flex items-center justify-between gap-4 border-b border-line py-6">
+            <span className="flex items-center gap-5">
+              <FaMapMarkerAlt className="text-muted" />
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted">
+                Location
+              </span>
+            </span>
+            <span className="text-right font-medium text-ink">
+              VIT Vellore, India
+            </span>
+          </div>
+        </motion.div>
 
-                    <h2 className="mt-4 text-5xl font-bold text-white">
-                        Let's Build Something Amazing
-                    </h2>
-
-                    <p className="mt-6 max-w-3xl mx-auto text-gray-400 leading-8">
-                        I'm always interested in discussing software engineering,
-                        artificial intelligence, machine learning, research opportunities,
-                        and exciting development projects. Whether it's an internship,
-                        collaboration, or simply exchanging ideas, I'd be happy to connect.
-                    </p>
-                </motion.div>
-
-                {/* Contact Cards */}
-
-                <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-
-                    {/* Email */}
-
-                    <motion.a
-                        whileHover={{ y: -8 }}
-                        href="mailto:atharvagaur7487@gmail.com"
-                        className="rounded-3xl border border-slate-800 bg-slate-900 p-8 text-center transition hover:border-blue-500"
-                    >
-                        <FaEnvelope
-                            size={34}
-                            className="mx-auto text-blue-400"
-                        />
-
-                        <h3 className="mt-6 text-xl font-semibold text-white">
-                            Email
-                        </h3>
-
-                        <p className="mt-3 text-gray-400">
-                            atharvagaur7487@gmail.com
-                        </p>
-
-                    </motion.a>
-
-                    {/* GitHub */}
-
-                    <motion.a
-                        whileHover={{ y: -8 }}
-                        href="https://github.com/Atharvagaur"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="rounded-3xl border border-slate-800 bg-slate-900 p-8 text-center transition hover:border-blue-500"
-                    >
-                        <FaGithub
-                            size={34}
-                            className="mx-auto text-white"
-                        />
-
-                        <h3 className="mt-6 text-xl font-semibold text-white">
-                            GitHub
-                        </h3>
-
-                        <p className="mt-3 text-gray-400">
-                            github.com/Atharvagaur
-                        </p>
-
-                    </motion.a>
-
-                    {/* LinkedIn */}
-
-                    <motion.a
-                        whileHover={{ y: -8 }}
-                        href="https://linkedin.com/in/atharvagaur7487"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="rounded-3xl border border-slate-800 bg-slate-900 p-8 text-center transition hover:border-blue-500"
-                    >
-                        <FaLinkedin
-                            size={34}
-                            className="mx-auto text-blue-500"
-                        />
-
-                        <h3 className="mt-6 text-xl font-semibold text-white">
-                            LinkedIn
-                        </h3>
-
-                        <p className="mt-3 text-gray-400">
-                            Connect with me
-                        </p>
-
-                    </motion.a>
-
-                    {/* Location */}
-
-                    <motion.div
-                        whileHover={{ y: -8 }}
-                        className="rounded-3xl border border-slate-800 bg-slate-900 p-8 text-center transition hover:border-blue-500"
-                    >
-                        <FaMapMarkerAlt
-                            size={34}
-                            className="mx-auto text-red-400"
-                        />
-
-                        <h3 className="mt-6 text-xl font-semibold text-white">
-                            Location
-                        </h3>
-
-                        <p className="mt-3 text-gray-400">
-                            VIT Vellore, India
-                        </p>
-
-                    </motion.div>
-
-                </div>
-
-                {/* Bottom */}
-
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="mt-20 rounded-3xl border border-slate-800 bg-linear-to-r from-blue-600/10 to-indigo-600/10 p-10 text-center"
-                >
-                    <h3 className="text-3xl font-bold text-white">
-                        Open to Internship Opportunities
-                    </h3>
-
-                    <p className="mt-5 text-gray-400 max-w-2xl mx-auto leading-8">
-                        Currently pursuing B.Tech in Computer Science (AI & ML) at
-                        VIT Vellore with a strong interest in Software Engineering,
-                        Artificial Intelligence, Machine Learning, and Full-Stack
-                        Development. I'm actively seeking internship opportunities
-                        where I can contribute, learn, and grow.
-                    </p>
-
-                    <a
-                        href="https://mail.google.com/mail/?view=cm&fs=1&to=atharvagaur7487@gmail.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block mt-8 rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white transition hover:bg-blue-700"
-                    >
-                        Get In Touch
-                    </a>
-
-                </motion.div>
-
-            </div>
-        </section>
-    );
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15, ease }}
+          className="mt-16 rounded-2xl border border-accent/30 bg-accent-soft p-10 text-center md:p-14"
+        >
+          <h3 className="font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
+            Open to internships & collaborations.
+          </h3>
+          <p className="mx-auto mt-5 max-w-xl leading-8 text-muted">
+            Currently pursuing B.Tech in Computer Science (AI & ML) at VIT
+            Vellore, actively seeking opportunities to contribute, learn, and
+            grow.
+          </p>
+          <a
+            href="mailto:atharvagaur7487@gmail.com"
+            className="mt-9 inline-block rounded-full bg-ink px-8 py-3.5 font-semibold text-paper transition-colors hover:bg-accent hover:text-white"
+          >
+            Get In Touch
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default Contact;

@@ -1,204 +1,121 @@
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 
-const skills = [
-  { name: "Machine Learning", value: 95 },
-  { name: "Deep Learning", value: 90 },
-  { name: "Retrieval-Augmented Generation", value: 95 },
-  { name: "Software Engineering", value: 88 },
+const ease = [0.22, 1, 0.36, 1];
+
+const facts = [
+  { label: "Education", value: "VIT Vellore" },
+  { label: "Degree", value: "B.Tech CSE (AI & ML)" },
+  { label: "CGPA", value: "9.53" },
+  { label: "Based in", value: "Vellore, India" },
 ];
 
-const timeline = [
+const journey = [
   {
     year: "2024",
-    title: "Machine Learning and Deep Learning",
+    title: "Machine Learning & Deep Learning foundations",
   },
   {
     year: "2025",
-    title: "DSA,Competitive Programming and Full Stack",
+    title: "DSA, competitive programming & full-stack development",
   },
   {
     year: "2026",
-    title: "RAG Systems & AI Research",
+    title: "RAG systems & AI research",
+    current: true,
   },
 ];
 
 const About = () => {
   return (
-    <section
-      id="about"
-      className="py-32 px-6"
-    >
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="section-pad">
+      <div className="container-site">
+        <div className="grid gap-16 lg:grid-cols-[1.2fr_1fr]">
+          <div>
+            <SectionHeading eyebrow="About" title="Building intelligent systems end to end." index="01" />
 
-        <SectionHeading
-          title="About Me"
-          subtitle="Who I Am"
-        />
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease }}
+            >
+              <p className="text-xl leading-8 text-ink">
+                I'm Atharva Gaur, a Computer Science student specializing in
+                Artificial Intelligence and Machine Learning at VIT Vellore.
+              </p>
+              <p className="mt-6 leading-8 text-muted">
+                My passion lies in designing intelligent systems that combine
+                machine learning, Retrieval-Augmented Generation, and software
+                engineering to solve practical real-world problems — from data
+                preprocessing and model training all the way to deployment.
+              </p>
+              <p className="mt-4 leading-8 text-muted">
+                Beyond building models, I enjoy the full product lifecycle:
+                shipping complete AI products, writing performant code, and
+                sharpening my problem-solving through competitive programming.
+              </p>
+            </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-
-          {/* Left Side */}
+            <motion.dl
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15, ease }}
+              className="mt-14 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-line pt-8 sm:grid-cols-4"
+            >
+              {facts.map((fact) => (
+                <div key={fact.label}>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+                    {fact.label}
+                  </dt>
+                  <dd className="mt-2 font-medium text-ink">{fact.value}</dd>
+                </div>
+              ))}
+            </motion.dl>
+          </div>
 
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2, ease }}
+            className="lg:pt-24"
           >
-
-            <h2 className="text-5xl font-black leading-tight">
-
-              Building
-              <span className="text-blue-500">
-                {" "}Intelligent Systems
-              </span>
-
-            </h2>
-
-            <p className="mt-8 text-lg text-gray-400 leading-9">
-
-              I'm Atharva Gaur, a Computer Science student specializing in
-              Artificial Intelligence and Machine Learning at VIT Vellore.
-
-              My passion lies in designing intelligent systems that combine
-              Machine Learning, Retrieval-Augmented Generation, and Software
-              Engineering to solve practical real-world problems.
-
-              Beyond building models, I enjoy creating complete AI products
-              from data preprocessing to deployment.
-
+            <p className="font-mono text-xs font-medium uppercase tracking-[0.35em] text-muted">
+              Journey
             </p>
 
-            <div className="mt-14 space-y-7">
-
-              {skills.map((skill) => (
-
-                <div key={skill.name}>
-
-                  <div className="flex justify-between mb-2">
-
-                    <span className="font-semibold">
-                      {skill.name}
-                    </span>
-
-                    <span className="text-blue-400">
-                      {skill.value}%
-                    </span>
-
-                  </div>
-
-                  <div className="h-3 rounded-full bg-slate-800 overflow-hidden">
-
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{
-                        width: `${skill.value}%`,
-                      }}
-                      transition={{
-                        duration: 1.5,
-                      }}
-                      viewport={{ once: true }}
-                      className="h-full rounded-full bg-linear-to-r from-blue-500 to-cyan-400"
-                    />
-
-                  </div>
-
-                </div>
-
-              ))}
-
-            </div>
-
-          </motion.div>
-
-          {/* Right Side */}
-
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-
-            <div className="relative">
-
-              <div className="absolute left-5 top-0 h-full w-1 bg-linear-to-b from-blue-500 to-cyan-400 rounded-full" />
-
-              <div className="space-y-12">
-
-                {timeline.map((item, index) => (
-
-                  <motion.div
-                    key={index}
-                    whileHover={{
-                      x: 10,
-                    }}
-                    className="relative pl-16"
-                  >
-
-                    <div className="absolute left-0 top-2 w-10 h-10 rounded-full bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.6)]" />
-
-                    <p className="text-blue-400 font-bold">
-
-                      {item.year}
-
-                    </p>
-
-                    <h3 className="text-2xl font-bold mt-1">
-
-                      {item.title}
-
-                    </h3>
-
-                  </motion.div>
-
-                ))}
-
-              </div>
-
-            </div>
-
-            {/* Floating Stats */}
-
-            <div className="grid grid-cols-2 gap-6 mt-16">
-
-              {[
-                ["CGPA", "9.53"],
-                ["Projects", "8+"],
-                ["DSA", "200+"],
-                ["Focus", "AI + ML"],
-              ].map(([title, value]) => (
-
-                <motion.div
-                  key={title}
-                  whileHover={{
-                    y: -8,
-                    scale: 1.04,
-                  }}
-                  className="rounded-3xl border border-blue-500/20 bg-slate-900/60 backdrop-blur-xl p-8"
+            <div className="mt-8 space-y-2 border-l border-line">
+              {journey.map((item) => (
+                <div
+                  key={item.year}
+                  className={`group border-l-2 py-5 pl-7 -ml-px transition-colors ${
+                    item.current
+                      ? "border-accent"
+                      : "border-transparent hover:border-accent/50"
+                  }`}
                 >
-
-                  <p className="text-gray-400">
-
-                    {title}
-
+                  <p
+                    className={`font-mono text-sm font-semibold ${
+                      item.current ? "text-accent" : "text-muted"
+                    }`}
+                  >
+                    {item.year}
+                    {item.current && (
+                      <span className="ml-3 rounded-full bg-accent-soft px-2.5 py-1 text-[10px] uppercase tracking-widest text-accent">
+                        Now
+                      </span>
+                    )}
                   </p>
-
-                  <h2 className="text-3xl font-bold mt-2 text-blue-400">
-
-                    {value}
-
-                  </h2>
-
-                </motion.div>
-
+                  <h3 className="mt-2 leading-snug font-medium text-ink">
+                    {item.title}
+                  </h3>
+                </div>
               ))}
-
             </div>
-
           </motion.div>
-
         </div>
-
       </div>
     </section>
   );

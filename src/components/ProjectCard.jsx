@@ -1,69 +1,62 @@
 import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaArrowRight, FaGithub } from "react-icons/fa";
+import CardSpotlight from "./CardSpotlight";
 import ProjectThumbnail from "./ProjectThumbnails";
+import { fadeUp } from "../lib/motion";
 
-const accentMap = {
-  1: "blue",
-  2: "cyan",
-  3: "violet",
-};
-
-const subtitleMap = {
-  1: "Machine Learning & Fraud Analytics",
-  2: "Retrieval-Augmented Generation",
-  3: "Deep Learning & NLP",
-};
-
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, index }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 70 }}
-      whileInView={{ opacity: 1, y: 0 }}
+    <motion.article
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
       viewport={{ once: true }}
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.45 }}
-      className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-xl hover:border-blue-500/40"
+      custom={(index % 2) * 0.12}
+      className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-card transition-colors duration-300 hover:border-accent/50"
     >
-      <ProjectThumbnail
-        title={project.title}
-        subtitle={subtitleMap[project.id]}
-        accent={accentMap[project.id]}
-        stats={project.stats}
-      />
+      <CardSpotlight className="flex flex-1 flex-col">
+        <ProjectThumbnail
+          title={project.title}
+          tagline={project.tagline}
+          variant={project.variant}
+          stats={project.stats}
+        />
 
-      <div className="p-7">
-        <p className="leading-7 text-gray-400">
-          {project.description}
-        </p>
+        <div className="relative z-20 flex flex-1 flex-col p-7">
+          <p className="leading-7 text-muted">{project.description}</p>
 
-        {/* Tech Stack */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {project.tech.map((tech) => (
+              <span
+                key={tech}
+                className="cursor-default rounded-full border border-line px-3 py-1.5 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-accent"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          {project.tech.map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-gray-300 transition hover:border-blue-500 hover:bg-blue-500/10"
+          <div className="mt-auto flex items-center justify-between pt-8">
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              className="group/link inline-flex items-center gap-2.5 rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-transparent hover:bg-ink hover:text-paper"
             >
-              {tech}
+              <FaGithub />
+              GitHub
+              <FaArrowRight
+                size={12}
+                className="-translate-x-1 opacity-0 transition-all group-hover/link:translate-x-0 group-hover/link:opacity-100"
+              />
+            </a>
+            <span className="font-mono text-xs text-muted">
+              P.{String(index + 1).padStart(2, "0")}
             </span>
-          ))}
+          </div>
         </div>
-
-        {/* Buttons */}
-
-        <div className="mt-8 flex gap-4">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold transition hover:bg-blue-700"
-          >
-            <FaGithub />
-            GitHub
-          </a>
-        </div>
-      </div>
-    </motion.div>
+      </CardSpotlight>
+    </motion.article>
   );
 };
 

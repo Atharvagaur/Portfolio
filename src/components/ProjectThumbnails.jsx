@@ -1,282 +1,158 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
-const accentClasses = {
-    blue: {
-        gradient: "from-blue-950 via-slate-900 to-slate-950",
-        glow: "bg-blue-500/20",
-        border: "border-blue-500/30",
-        text: "text-blue-400",
-        card: "bg-blue-500/10",
-        badge: "bg-blue-500/10 border-blue-500/20 text-blue-300",
-    },
-    cyan: {
-        gradient: "from-cyan-950 via-slate-900 to-slate-950",
-        glow: "bg-cyan-500/20",
-        border: "border-cyan-500/30",
-        text: "text-cyan-400",
-        card: "bg-cyan-500/10",
-        badge: "bg-cyan-500/10 border-cyan-500/20 text-cyan-300",
-    },
-    violet: {
-        gradient: "from-violet-950 via-slate-900 to-slate-950",
-        glow: "bg-violet-500/20",
-        border: "border-violet-500/30",
-        text: "text-violet-400",
-        card: "bg-violet-500/10",
-        badge: "bg-violet-500/10 border-violet-500/20 text-violet-300",
-    },
+const FraudDemo = () => (
+  <div className="w-full max-w-sm rounded-xl border border-line bg-paper/70 p-5 backdrop-blur">
+    <div className="flex items-center justify-between font-mono text-[10px] tracking-widest text-muted uppercase">
+      <span>Fraud score</span>
+      <span className="font-semibold text-emerald-500">SAFE</span>
+    </div>
+    <div className="mt-4 h-2 overflow-hidden rounded-full bg-line">
+      <motion.div
+        initial={{ width: "15%" }}
+        whileInView={{ width: ["20%", "88%", "82%", "88%"] }}
+        viewport={{ once: false }}
+        transition={{ duration: 4.5, repeat: Infinity }}
+        className="h-full rounded-full bg-accent"
+      />
+    </div>
+    <div className="mt-4 grid grid-cols-3 gap-3">
+      {[
+        ["Precision", "96%"],
+        ["Recall", "92%"],
+        ["F1", "94%"],
+      ].map(([label, value]) => (
+        <div key={label} className="rounded-lg border border-line px-2 py-2 text-center">
+          <p className="font-mono text-[9px] tracking-widest text-muted uppercase">
+            {label}
+          </p>
+          <p className="mt-0.5 font-semibold text-ink">{value}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const RagDemo = () => {
+  const nodes = ["PDF", "Vector DB", "LLM"];
+
+  return (
+    <div className="w-full max-w-sm rounded-xl border border-line bg-paper/70 p-5 backdrop-blur">
+      <div className="relative flex items-center justify-between">
+        {nodes.map((node, i) => (
+          <motion.span
+            key={node}
+            animate={{ scale: [1, 1.08, 1], borderColor: "var(--line)" }}
+            transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.8 }}
+            className="relative z-10 rounded-lg border bg-card px-3 py-2 font-mono text-[11px] font-medium text-accent"
+          >
+            {node}
+          </motion.span>
+        ))}
+        <div className="absolute inset-x-6 top-1/2 h-px -translate-y-1/2 bg-line" />
+        <motion.span
+          animate={{ left: ["4%", "96%"] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 z-0 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_10px_var(--accent)]"
+        />
+      </div>
+      <p className="mt-5 text-center font-mono text-[11px] text-muted">
+        upload → semantic search → grounded answer
+      </p>
+    </div>
+  );
 };
 
-const ProjectThumbnail = ({
-    title,
-    subtitle,
-    accent = "blue",
-    stats = [],
-}) => {
-    const theme = accentClasses[accent];
-
-    return (
-        <motion.div
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.35 }}
-            className={`relative h-64 overflow-hidden rounded-t-3xl bg-linear-to-br ${theme.gradient}`}
-        >
-            {/* Glow */}
-            <div
-                className={`absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl ${theme.glow}`}
-            />
-
-            {/* Grid */}
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0 flex items-center justify-center opacity-30">
-
-                    <motion.div
-
-                        animate={{ rotate: 360 }}
-
-                        transition={{
-                            duration: 60,
-                            repeat: Infinity,
-                            ease: "linear"
-                        }}
-
-                        className="h-105 w-105 rounded-full border border-white/5"
-
-                    />
-
-                </div>
-                <div
-                    className="h-full w-full"
-                    style={{
-                        backgroundImage:
-                            "linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px)",
-                        backgroundSize: "30px 30px",
-                    }}
-                />
-            </div>
-
-            {/* Heading */}
-            <div className="relative z-10 p-6">
-                <p
-                    className={`text-xs font-semibold tracking-[0.35em] uppercase ${theme.text}`}
-                >
-                    AI PROJECT
-                </p>
-
-                <h2 className="mt-3 text-3xl font-black leading-tight text-white">
-                    {title}
-                </h2>
-
-                <p className="mt-2 text-sm text-gray-400">{subtitle}</p>
-            </div>
-
-            {/* Center Icon */}
-            <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                }}
-                className="absolute inset-x-0 top-[45%] px-8"
-            >
-
-                {accent === "blue" && (
-
-                    <div className="rounded-3xl border border-blue-500/20 bg-slate-900/80 p-5 backdrop-blur-xl">
-
-                        <div className="flex justify-between">
-
-                            <span className="text-xs text-blue-300">
-                                Fraud Score
-                            </span>
-
-                            <span className="text-xs text-green-400">
-                                SAFE
-                            </span>
-
-                        </div>
-
-                        <div className="mt-3 h-3 overflow-hidden rounded-full bg-slate-700">
-
-                            <motion.div
-
-                                initial={{ width: "15%" }}
-
-                                animate={{
-
-                                    width: ["20%", "92%", "88%", "92%"]
-
-                                }}
-
-                                transition={
-
-                                    {
-
-                                        duration: 4,
-
-                                        repeat: Infinity
-
-                                    }
-
-                                }
-
-                                className="h-full rounded-full bg-linear-to-r from-blue-500 via-cyan-400 to-cyan-300"
-                            />
-
-                        </div>
-
-                        <div className="mt-4 flex justify-between text-sm">
-
-                            <span className="text-gray-400">
-                                Accuracy
-                            </span>
-
-                            <span className="font-bold text-white">
-                                94%
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                )}
-
-                {accent === "cyan" && (
-
-                    <div className="rounded-3xl border border-cyan-500/20 bg-slate-900/80 p-5 backdrop-blur-xl">
-
-                        <div className="flex justify-between">
-
-                            <div className="rounded bg-cyan-500/20 px-2 py-1 text-xs text-cyan-300">
-                                PDF
-                            </div>
-
-                            <div className="rounded bg-cyan-500/20 px-2 py-1 text-xs text-cyan-300">
-                                LLM
-                            </div>
-
-                        </div>
-
-                        <div className="mt-5 flex items-center justify-between">
-
-                            <div className="h-3 w-3 rounded-full bg-cyan-400" />
-
-                            <div className="h-0.5 flex-1 bg-cyan-500/40" />
-
-                            <div className="h-3 w-3 rounded-full bg-cyan-400" />
-
-                            <div className="h-0.5 flex-1 bg-cyan-500/40" />
-
-                            <div className="h-3 w-3 rounded-full bg-cyan-400" />
-
-                        </div>
-
-                        <p className="mt-4 text-center text-xs text-gray-400">
-
-                            Upload → Vector DB → AI Answer
-
-                        </p>
-
-                    </div>
-
-                )}
-
-                {accent === "violet" && (
-
-                    <div className="rounded-3xl border border-violet-500/20 bg-slate-900/80 p-5 backdrop-blur-xl">
-
-                        <div className="text-xs text-violet-300">
-
-                            Input Sentence
-
-                        </div>
-
-                        <div className="mt-3 rounded-xl bg-slate-800 p-3 text-sm text-gray-300">
-
-                            Machine Learning is...
-
-                        </div>
-
-                        <motion.div
-                            animate={{
-                                opacity: [0.3, 1, 0.3],
-                            }}
-                            transition={{
-                                repeat: Infinity,
-                                duration: 2,
-                            }}
-                            className="mt-4 text-center text-xl font-bold text-violet-300"
-                        >
-
-                            intelligent
-
-                        </motion.div>
-
-                    </div>
-
-                )}
-
-            </motion.div>
-
-            {/* Bottom Stats */}
-            <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
-                {stats.map((item, index) => (
-
-                    <motion.div
-
-                        key={item}
-
-                        initial={{
-                            opacity: 0,
-                            y: 15
-                        }}
-
-                        whileInView={{
-                            opacity: 1,
-                            y: 0
-                        }}
-
-                        transition={{
-                            delay: index * 0.15
-                        }}
-
-                        className={`rounded-lg border px-3 py-1 text-xs font-semibold backdrop-blur ${theme.badge}`}
-                    >
-
-                        {item}
-
-                    </motion.div>
-
-                ))}
-            </div>
-
-            {/* Decorative Circles */}
-            <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full border border-white/10" />
-            <div className="absolute right-10 top-8 h-4 w-4 rounded-full bg-white/20" />
-            <div className="absolute right-20 top-20 h-2 w-2 rounded-full bg-white/20" />
-            <div className="absolute right-14 top-28 h-1.5 w-1.5 rounded-full bg-white/20" />
-        </motion.div>
+const predictions = ["intelligent", "powerful", "everywhere", "iterative"];
+
+const NlpDemo = () => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % predictions.length),
+      2200
     );
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="w-full max-w-sm rounded-xl border border-line bg-paper/70 p-5 backdrop-blur">
+      <p className="font-mono text-[10px] tracking-widest text-muted uppercase">
+        Next word prediction
+      </p>
+      <div className="mt-3 rounded-lg border border-line bg-card p-3 font-mono text-sm text-muted">
+        machine learning is
+        <span className="ml-1 inline-block h-4 w-[2px] animate-pulse bg-accent align-middle" />
+      </div>
+      <div className="flex h-9 items-center justify-center">
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={predictions[index]}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
+            className="font-display text-xl italic text-accent"
+          >
+            {predictions[index]}
+          </motion.span>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+const demos = {
+  fraud: FraudDemo,
+  rag: RagDemo,
+  nlp: NlpDemo,
+};
+
+const ProjectThumbnail = ({ title, tagline, stats = [], variant }) => {
+  const Demo = demos[variant] ?? demos.fraud;
+
+  return (
+    <div className="relative flex h-72 flex-col overflow-hidden border-b border-line bg-gradient-to-br from-accent-soft via-card to-card">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-60"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--line) 1px, transparent 1px), linear-gradient(to bottom, var(--line) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+          maskImage:
+            "radial-gradient(ellipse at center, black 30%, transparent 80%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at center, black 30%, transparent 80%)",
+        }}
+      />
+
+      <header className="relative z-20 px-7 pt-6">
+        <p className="font-mono text-[10px] font-semibold tracking-[0.3em] text-accent uppercase">
+          {tagline}
+        </p>
+        <h3 className="mt-2 font-display text-2xl leading-tight font-medium text-ink">
+          {title}
+        </h3>
+      </header>
+
+      <div className="group-hover:scale-[1.03] relative z-10 flex flex-1 items-center justify-center px-8 py-4 transition-transform duration-500">
+        <Demo />
+      </div>
+
+      <footer className="relative z-20 flex flex-wrap gap-2 px-7 pb-5">
+        {stats.map((stat) => (
+          <span
+            key={stat}
+            className="rounded-md border border-line bg-paper/80 px-2.5 py-1 font-mono text-[11px] font-medium text-ink backdrop-blur"
+          >
+            {stat}
+          </span>
+        ))}
+      </footer>
+    </div>
+  );
 };
 
 export default ProjectThumbnail;

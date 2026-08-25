@@ -1,25 +1,32 @@
 import { motion } from "framer-motion";
+import { blurReveal } from "../lib/motion";
 
-const SectionHeading = ({ title, subtitle }) => {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+const SectionHeading = ({ eyebrow, title, index }) => {
+  return (
+    <motion.div
+      variants={blurReveal}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className="relative mb-14 md:mb-16"
+    >
+      {index && (
+        <span
+          aria-hidden="true"
+          className="absolute -top-10 right-0 font-display text-[6rem] leading-none font-semibold text-transparent select-none md:-top-16 md:text-[8.5rem]"
+          style={{ WebkitTextStroke: "1.5px var(--line)" }}
         >
-            <p className="text-blue-500 font-semibold uppercase tracking-[4px]">
-                {subtitle}
-            </p>
-
-            <h2 className="text-4xl md:text-5xl font-bold mt-3">
-                {title}
-            </h2>
-
-            <div className="h-1 w-28 bg-blue-500 mx-auto mt-5 rounded-full"></div>
-        </motion.div>
-    );
+          {index}
+        </span>
+      )}
+      <p className="font-mono text-xs font-medium tracking-[0.35em] text-accent uppercase">
+        {eyebrow}
+      </p>
+      <h2 className="mt-4 max-w-2xl font-display text-4xl font-medium tracking-tight text-ink md:text-5xl">
+        {title}
+      </h2>
+    </motion.div>
+  );
 };
 
 export default SectionHeading;

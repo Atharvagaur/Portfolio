@@ -1,119 +1,141 @@
-import { TypeAnimation } from "react-type-animation";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import HeroGraphics from "./HeroGraphics";
+import { TypeAnimation } from "react-type-animation";
+import { fadeUp } from "../lib/motion";
+import { scrollToSection } from "../hooks/useLenis";
 
 const Hero = () => {
-  return (
-    <section
-      id="home"
-      className="min-h-screen flex items-center pt-24"
-    >
-      <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
+  const { scrollY } = useScroll();
+  const parallaxY = useTransform(scrollY, [0, 700], [0, 110]);
+  const parallaxOpacity = useTransform(scrollY, [0, 550], [1, 0]);
 
-        {/* Left Content */}
+  return (
+    <section id="home" className="relative flex min-h-screen items-center">
+      <motion.div
+        style={{ y: parallaxY, opacity: parallaxOpacity }}
+        className="container-site pt-32 pb-20"
+      >
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          custom={0}
+          className="font-mono text-xs font-medium tracking-[0.35em] text-accent uppercase"
+        >
+          Hello, I'm
+        </motion.p>
+
+        <motion.h1
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          custom={0.1}
+          className="mt-5 font-display text-[clamp(3.25rem,9vw,7rem)] leading-[0.95] font-medium tracking-tight text-ink"
+        >
+          Atharva
+          <br />
+          <em className="font-light text-accent">Gaur.</em>
+        </motion.h1>
 
         <motion.div
-          initial={{ opacity: 0, x: -70 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          custom={0.2}
+          className="mt-7 h-8 font-mono text-lg text-muted md:text-xl"
         >
-          <p className="text-blue-400 text-xl font-medium">
-            Hello, I'm
-          </p>
+          <TypeAnimation
+            sequence={[
+              "AI & Machine Learning Engineer",
+              1600,
+              "RAG & Agentic AI Developer",
+              1600,
+              "Deep Learning Enthusiast",
+              1600,
+              "Competitive Programmer",
+              1600,
+            ]}
+            speed={45}
+            repeat={Infinity}
+          />
+        </motion.div>
 
-          <h1 className="mt-3 text-6xl lg:text-7xl font-black leading-tight">
-            ATHARVA
-            <br />
-            <span className="text-blue-500">
-              GAUR
-            </span>
-          </h1>
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          custom={0.3}
+          className="mt-8 max-w-xl text-lg leading-8 text-muted"
+        >
+          I build intelligent systems end to end — from data pipelines and
+          model training to RAG applications and deployed products — with
+          clean, efficient code.
+        </motion.p>
 
-          <div className="mt-6 text-2xl font-semibold text-gray-300 h-10">
-            <TypeAnimation
-              sequence={[
-                "AI & Machine Learning Engineer",
-                1500,
-                "Deep Learning Enthusiast",
-                1500,
-                "RAG Developer",
-                1500,
-                "Competitive Programmer",
-                1500,
-              ]}
-              speed={45}
-              repeat={Infinity}
-            />
-          </div>
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          custom={0.4}
+          className="mt-10 flex flex-wrap items-center gap-4"
+        >
+          <button
+            onClick={() => scrollToSection("#projects")}
+            className="rounded-full bg-ink px-7 py-3.5 font-semibold text-paper transition-colors hover:bg-accent hover:text-white"
+          >
+            View Projects
+          </button>
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("#contact");
+            }}
+            className="rounded-full border border-line px-7 py-3.5 font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
+          >
+            Contact Me
+          </a>
 
-          <p className="mt-8 text-lg text-gray-400 leading-8 max-w-xl">
-            Passionate about building intelligent AI systems,
-            designing scalable machine learning solutions,
-            developing Retrieval-Augmented Generation (RAG)
-            applications, and solving challenging algorithmic
-            problems through clean and efficient code.
-          </p>
-
-          <div className="flex gap-5 mt-10">
-
-            <button
-              onClick={() =>
-                document
-                  .getElementById("projects")
-                  ?.scrollIntoView({
-                    behavior: "smooth",
-                  })
-              }
-              className="rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white transition duration-300 hover:scale-105 hover:bg-blue-700 shadow-lg shadow-blue-500/30"
-            >
-              View Projects
-            </button>
-
-            <a
-              href="#contact"
-              className="rounded-xl border border-blue-500 px-8 py-4 font-semibold text-blue-400 transition duration-300 hover:bg-blue-500 hover:text-white"
-            >
-              Contact Me
-            </a>
-
-          </div>
-
-          <div className="flex items-center gap-6 mt-10 text-3xl text-gray-300">
-
+          <div className="ml-1 flex items-center gap-4 text-xl text-muted">
             <a
               href="https://github.com/atharvagaur"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition hover:text-blue-400 hover:scale-110"
+              aria-label="GitHub"
+              className="transition-colors hover:text-accent"
             >
               <FaGithub />
             </a>
-
             <a
               href="https://www.linkedin.com/in/atharvagaur7487"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition hover:text-blue-400 hover:scale-110"
+              aria-label="LinkedIn"
+              className="transition-colors hover:text-accent"
             >
               <FaLinkedin />
             </a>
-
           </div>
         </motion.div>
 
-        {/* Right Graphic */}
-
         <motion.div
-          initial={{ opacity: 0, x: 70 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="flex justify-center"
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          custom={0.55}
+          className="mt-20 flex flex-wrap gap-x-12 gap-y-4 border-t border-line pt-6 font-mono text-xs tracking-widest text-muted uppercase"
         >
-          <HeroGraphics />
+          <span>Vellore, India</span>
+          <span>B.Tech CS — AI & ML</span>
+          <span className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            Open to internships
+          </span>
         </motion.div>
-
-      </div>
+      </motion.div>
     </section>
   );
 };
