@@ -36,12 +36,12 @@ const CustomCursor = () => {
     <>
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed top-0 left-0 z-[100] h-1.5 w-1.5 rounded-full bg-accent"
+        className="pointer-events-none fixed top-0 left-0 z-100 h-1.5 w-1.5 rounded-full bg-accent"
         style={{ x, y, translateX: "-50%", translateY: "-50%" }}
       />
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed top-0 left-0 z-[99] rounded-full border border-accent/60"
+        className="pointer-events-none fixed top-0 left-0 z-99 rounded-full border border-accent/60"
         style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
         animate={{
           width: hovering ? 44 : 24,

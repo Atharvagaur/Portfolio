@@ -23,7 +23,7 @@ const BackToTop = () => {
           transition={{ duration: 0.25 }}
           onClick={() => scrollToSection("#home")}
           aria-label="Back to top"
-          className="fixed right-6 bottom-6 z-[60] flex h-11 w-11 items-center justify-center rounded-full border border-line bg-card text-muted shadow-lg transition-colors hover:border-accent hover:text-accent"
+          className="fixed right-6 bottom-6 z-60 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-card text-muted shadow-lg transition-colors hover:border-accent hover:text-accent"
         >
           <FaArrowUp size={14} />
         </motion.button>

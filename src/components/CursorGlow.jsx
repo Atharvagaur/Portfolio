@@ -22,7 +22,7 @@ const CursorGlow = () => {
   return (
     <motion.div
       aria-hidden="true"
-      className="pointer-events-none fixed top-0 left-0 -z-10 hidden h-[520px] w-[520px] rounded-full dark:block"
+      className="pointer-events-none fixed top-0 left-0 -z-10 hidden h-130 w-130 rounded-full dark:block"
       style={{
         x: springX,
         y: springY,

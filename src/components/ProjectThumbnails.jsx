@@ -83,7 +83,7 @@ const NlpDemo = () => {
       </p>
       <div className="mt-3 rounded-lg border border-line bg-card p-3 font-mono text-sm text-muted">
         machine learning is
-        <span className="ml-1 inline-block h-4 w-[2px] animate-pulse bg-accent align-middle" />
+        <span className="ml-1 inline-block h-4 w-0.5 animate-pulse bg-accent align-middle" />
       </div>
       <div className="flex h-9 items-center justify-center">
         <AnimatePresence mode="wait">
@@ -113,7 +113,7 @@ const ProjectThumbnail = ({ title, tagline, stats = [], variant }) => {
   const Demo = demos[variant] ?? demos.fraud;
 
   return (
-    <div className="relative flex h-72 flex-col overflow-hidden border-b border-line bg-gradient-to-br from-accent-soft via-card to-card">
+    <div className="relative flex h-72 flex-col overflow-hidden border-b border-line bg-linear-to-br from-accent-soft via-card to-card">
       <div
         aria-hidden="true"
         className="absolute inset-0 opacity-60"

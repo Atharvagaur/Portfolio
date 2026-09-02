@@ -165,12 +165,12 @@ const Navbar = () => {
                 </a>
               ))}
               <a
-                href="/Atharva Gaur AIML.pdf"
+                href="/Atharva Gaur SDE.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 rounded-full bg-ink px-5 py-3 text-center text-sm font-semibold text-paper"
               >
-                View Résumé
+                View Resume
               </a>
             </div>
           </motion.div>
