@@ -53,7 +53,7 @@ const contributions = [
     status: "Open",
     merged: false,
     description:
-      "Independently validated an open-source MCP result-conversion fix against a live server using stdio transport and MCP SDK 2.3.0. Verified mixed-content ordering, distinct mixed/text-only results, and text-only compatibility. Ran the MCP test suite (34 passed) and identified a documentation mismatch that the PR author subsequently addressed.",
+      "Validated an MCP result-conversion fix against a live stdio server (MCP SDK 2.3.0), verifying content ordering and output compatibility. Passed 34 tests and flagged a documentation issue subsequently fixed by the PR author.",
     technologies: ["Python", "MCP", "Integration Testing", "Code Review"],
     href: "https://github.com/stanfordnlp/dspy/pull/10642",
   },
