@@ -4,6 +4,7 @@ import Marquee from "./components/Marquee";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
+import OpenSource from "./components/OpenSource";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import GridTexture from "./components/GridTexture";
@@ -29,6 +30,7 @@ function App() {
         <About />
         <Skills />
         <Projects />
+        <OpenSource />
         <Contact />
       </main>
       <Footer />
