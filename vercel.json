@@ -1,0 +1,16 @@
+
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "gaur-atharva.vercel.app"
+        }
+      ],
+      "destination": "https://atharvagaur.me/:path*",
+      "permanent": true
+    }
+  ]
+}
