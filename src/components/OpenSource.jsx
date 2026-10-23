@@ -48,13 +48,13 @@ const contributions = [
   {
     project: "DSPy",
     repository: "stanfordnlp/dspy",
-    title: "Preserve non-text block positions in MCP results",
+    title: "MCP Integration Testing & Validation",
     number: "#10642",
     status: "Open",
     merged: false,
     description:
-      "Fixed MCP text-mode conversion so non-text content stays in its original position among text blocks, avoiding collisions between mixed-content and pure-text results. Added a regression test.",
-    technologies: ["Python", "MCP", "Regression testing"],
+      "Independently validated an open-source MCP result-conversion fix against a live server using stdio transport and MCP SDK 2.3.0. Verified mixed-content ordering, distinct mixed/text-only results, and text-only compatibility. Ran the MCP test suite (34 passed) and identified a documentation mismatch that the PR author subsequently addressed.",
+    technologies: ["Python", "MCP", "Integration Testing", "Code Review"],
     href: "https://github.com/stanfordnlp/dspy/pull/10642",
   },
 ];
