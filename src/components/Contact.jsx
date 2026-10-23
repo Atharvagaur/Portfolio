@@ -80,16 +80,20 @@ const Contact = () => {
               </span>
             </a>
           ))}
-
-          <div className="flex items-center justify-between gap-4 border-b border-line py-6">
+          <div className="grid grid-cols-[1fr_auto] items-center gap-4 border-b border-line py-6">
             <span className="flex items-center gap-5">
               <FaMapMarkerAlt className="text-muted" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted">
                 Location
               </span>
             </span>
-            <span className="text-right font-medium text-ink">
-              VIT Vellore, India
+            <span className="flex items-center gap-4 text-right font-medium text-ink">
+              <span>VIT Vellore, India</span>
+              <FaArrowRight
+                size={14}
+                aria-hidden="true"
+                className="-translate-x-1 opacity-0"
+              />
             </span>
           </div>
         </motion.div>
