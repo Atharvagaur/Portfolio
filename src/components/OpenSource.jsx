@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import {
-  FaArrowUpRightFromSquare,
+  FaExternalLinkAlt,
   FaCodeBranch,
-  FaGitPullRequest,
   FaCheckCircle,
   FaClock,
 } from "react-icons/fa";
@@ -113,7 +112,7 @@ const ContributionCard = ({ contribution, index }) => {
 
       <div className="mt-7 flex items-center justify-between border-t border-line pt-5">
         <span className="inline-flex items-center gap-2 font-mono text-xs text-muted">
-          <FaGitPullRequest size={12} />
+          <FaCodeBranch size={12} />
           {contribution.number}
         </span>
         <a
@@ -124,7 +123,7 @@ const ContributionCard = ({ contribution, index }) => {
           className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
         >
           View PR
-          <FaArrowUpRightFromSquare size={11} />
+          <FaExternalLinkAlt size={11} />
         </a>
       </div>
     </motion.article>
