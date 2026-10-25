@@ -123,7 +123,7 @@ const Navbar = () => {
           </button>
 
           <a
-            href="/Atharva Gaur SDE.pdf"
+            href="/Atharva_Gaur.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-accent hover:text-white sm:inline-flex"
@@ -166,7 +166,7 @@ const Navbar = () => {
                 </a>
               ))}
               <a
-                href="/Atharva Gaur SDE.pdf"
+                href="/Atharva_Gaur.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 rounded-full bg-ink px-5 py-3 text-center text-sm font-semibold text-paper"
