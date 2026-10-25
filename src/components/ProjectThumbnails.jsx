@@ -7,13 +7,12 @@ const FraudDemo = () => (
       <span>Fraud score</span>
       <span className="font-semibold text-emerald-500">SAFE</span>
     </div>
-    <div className="mt-4 h-2 overflow-hidden rounded-full bg-line">
+    <div className="mt-4 h-2 overflow-hidden rounded-full bg-line relative">
       <motion.div
-        initial={{ width: "15%" }}
-        whileInView={{ width: ["20%", "88%", "82%", "88%"] }}
-        viewport={{ once: false }}
-        transition={{ duration: 4.5, repeat: Infinity }}
-        className="h-full rounded-full bg-accent"
+        initial={{ left: "-25%" }}
+        animate={{ left: ["-25%", "125%"] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+        className="absolute top-0 bottom-0 w-1/4 bg-accent shadow-[0_0_12px_var(--accent)]"
       />
     </div>
     <div className="mt-4 grid grid-cols-3 gap-3">
@@ -103,10 +102,82 @@ const NlpDemo = () => {
   );
 };
 
+const CareTrackDemo = () => (
+  <div className="w-full max-w-sm rounded-xl border border-line bg-paper/70 p-5 backdrop-blur">
+    <div className="flex items-center justify-between font-mono text-[10px] tracking-widest text-muted uppercase">
+      <span>Kanban board</span>
+      <span className="font-semibold text-emerald-500">3 OPEN</span>
+    </div>
+    <div className="mt-4 grid grid-cols-3 gap-2">
+      {[
+        ["Backlog", "12"],
+        ["In Progress", "4"],
+        ["Done", "18"],
+      ].map(([label, value]) => (
+        <div key={label} className="rounded-lg border border-line p-2 text-center">
+          <p className="font-mono text-[9px] tracking-widest text-muted uppercase">
+            {label}
+          </p>
+          <p className="mt-0.5 font-semibold text-ink">{value}</p>
+        </div>
+      ))}
+    </div>
+    <div className="mt-4 rounded-lg border border-line bg-card p-3 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1 h-full bg-accent animate-pulse" />
+      <p className="font-mono text-[10px] tracking-widest text-muted uppercase mb-1">
+        Issue #0427
+      </p>
+      <div className="flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-accent shadow-[0_0_8px_var(--accent)] animate-pulse" />
+        <span className="font-mono text-xs font-medium text-ink">In Progress</span>
+      </div>
+      <p className="absolute bottom-1 right-1 font-mono text-[9px] text-muted">
+        HIGH · 2h ago
+      </p>
+    </div>
+  </div>
+);
+
+const DDoSDemo = () => (
+  <div className="w-full max-w-sm rounded-xl border border-line bg-paper/70 p-5 backdrop-blur">
+    <div className="flex items-center justify-between font-mono text-[10px] tracking-widest text-muted uppercase">
+      <span>Traffic anomaly</span>
+      <span className="font-semibold text-rose-500">DETECTED</span>
+    </div>
+    <div className="mt-4 flex items-end gap-1 h-12">
+      {[60, 90, 70, 95, 80].map((h, i) => (
+        <motion.div
+          key={i}
+          animate={{ scaleY: [0.6, 1, 0.6] }}
+          transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
+          className="w-2 bg-accent rounded-t-sm origin-bottom"
+          style={{ height: `${h}%` }}
+        />
+      ))}
+    </div>
+    <div className="mt-4 grid grid-cols-3 gap-3">
+      {[
+        ["RF", "94%"],
+        ["XGB", "91%"],
+        ["IF", "88%"],
+      ].map(([label, value]) => (
+        <div key={label} className="rounded-lg border border-line px-2 py-2 text-center">
+          <p className="font-mono text-[9px] tracking-widest text-muted uppercase">
+            {label}
+          </p>
+          <p className="mt-0.5 font-semibold text-ink">{value}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
 const demos = {
   fraud: FraudDemo,
   rag: RagDemo,
   nlp: NlpDemo,
+  caretrack: CareTrackDemo,
+  ddos: DDoSDemo,
 };
 
 const ProjectThumbnail = ({ title, tagline, stats = [], variant }) => {
